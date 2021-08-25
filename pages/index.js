@@ -33,8 +33,9 @@ export default function Home() {
     handleSubmit,
     isSubmitting
   } = useFormik({
-    onSubmit: (values, form) => { 
-      console.log(values)
+    onSubmit: async (values, form) => { 
+      const user = await firebase.auth().signInWithEmailAndPassword(values.email, values.password)
+      console.log(user)
     },
     validationSchema,
     initialValues: {
