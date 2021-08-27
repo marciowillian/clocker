@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react'
 
 import { Logo } from '../Logo'
-import firebase, { persistenceMode } from './../../config/firebase'
+import { firebaseClient,  persistenceMode } from '../../config/firebase/client'
 import { useEffect } from 'react'
 
 const validationSchema = yup.object().shape({
@@ -33,10 +33,10 @@ export const Login = () => {
     isSubmitting
   } = useFormik({
     onSubmit: async (values, form) => { 
-      firebase.auth().setPersistence(persistenceMode)
+      firebaseClient.auth().setPersistence(persistenceMode)
 
       try {
-        const user = await firebase.auth().signInWithEmailAndPassword(values.email, values.password)
+        const user = await firebaseClient.auth().signInWithEmailAndPassword(values.email, values.password)
         console.log(user)
       } catch (error) {
         console.log('ERROR: ',error)
@@ -52,7 +52,7 @@ export const Login = () => {
   })
 
   useEffect(() => {
-    console.log('Sessão ativa?', firebase.auth().currentUser)
+    console.log('Sessão ativa?', firebaseClient.auth().currentUser)
   }, [])
 
   return (
