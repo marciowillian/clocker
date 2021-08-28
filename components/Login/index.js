@@ -15,7 +15,6 @@ import {
 
 import { Logo } from '../Logo'
 import { firebaseClient,  persistenceMode } from './../../config/firebase/client'
-import { useEffect } from 'react'
 
 const validationSchema = yup.object().shape({
   email: yup.string().email('E-mail inválido').required('Preenchimento obrigatório'),
@@ -38,6 +37,7 @@ export const Login = () => {
       try {
         const user = await firebaseClient.auth().signInWithEmailAndPassword(values.email, values.password)
         console.log(user)
+        console.log(firebaseClient.auth().currentUser)
       } catch (error) {
         console.log('ERROR: ',error)
       }
@@ -50,10 +50,6 @@ export const Login = () => {
       password: ''
     }
   })
-
-  useEffect(() => {
-    console.log('Sessão ativa?', firebaseClient.auth().currentUser)
-  }, [])
 
   return (
     <Container p={4} centerContent>

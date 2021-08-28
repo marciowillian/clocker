@@ -1,9 +1,9 @@
 
 import firebaseServer from 'firebase-firebaseServer'
 
-const app = firebaseServer.apps.length
-    ? firebaseServer.app()
-    : firebaseServer.initializeApp({
+const app = firebase.apps.length
+    ? firebase.app()
+    : firebase.initializeApp({
         credential: firebaseServer.credential.cert({
             type: "service_account",
             auth_uri: "https://accounts.google.com/o/oauth2/auth",
