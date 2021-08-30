@@ -1,9 +1,12 @@
 import { ChakraProvider } from "@chakra-ui/react"
+import { AuthProvider } from "../components/Auth"
 
 function MyApp({ Component, pageProps }) {
   return (
     <ChakraProvider>
-      <Component {...pageProps} />
+      <AuthProvider>
+        <Component {...pageProps} />
+      </AuthProvider>
     </ChakraProvider>
   )
 }
@@ -11,10 +14,10 @@ function MyApp({ Component, pageProps }) {
 export default MyApp
 
 
-function App({ Component }) {
-  return (
-    <ChakraProvider>
-      <Component />
-    </ChakraProvider>
-  )
-}
+// function App({ Component }) {
+//   return (
+//     <ChakraProvider>
+//       <Component />
+//     </ChakraProvider>
+//   )
+// }
