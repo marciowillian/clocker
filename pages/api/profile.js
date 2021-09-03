@@ -3,7 +3,7 @@ import { firebaseServer } from './../../config/firebase/server'
 const db = firebaseServer.firestore()
 const profile = db.collection('profiles')
 
-export default async (req, res) => {
+const app = async (req, res) => {
   const [, token] = req.headers.authorization.split(' ')
   const { user_id } = await firebaseServer.auth().verifyIdToken(token)
 
@@ -14,3 +14,5 @@ export default async (req, res) => {
 
   res.status(200).json({ name: 'John Doe' })
 }
+
+export default app
